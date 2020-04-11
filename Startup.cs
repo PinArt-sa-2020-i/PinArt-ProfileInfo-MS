@@ -23,9 +23,13 @@ namespace PinArt_ProfileInfo_MS
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CommandContext>
+            services.AddDbContext<InfoContext>
                 (options => options.UseMySql(Configuration["Data:PinArtAPIConnection:ConnectionString"]));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
