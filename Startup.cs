@@ -34,10 +34,13 @@ namespace PinArt_ProfileInfo_MS
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            PrepDB.PrepPopulation(app);
 
             app.UseHttpsRedirection();
 
