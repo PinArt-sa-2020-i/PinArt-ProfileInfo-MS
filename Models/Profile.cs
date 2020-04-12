@@ -13,10 +13,8 @@ namespace PinArt_ProfileInfo_MS.Models
         public string Edad { get; set; }
 
         public int UserId { get; set; }
-        public virtual User User { get; set; }
 
         public int CountryId { get; set; }
-        public virtual Country Country { get; set; }
 
     }
 }

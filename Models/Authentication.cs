@@ -7,7 +7,6 @@ namespace PinArt_ProfileInfo_MS.Models
         public int Id { get; set; }
         public string Estado { get; set; }
         public int UserId { get; set; }
-        public virtual User User { get; set; }
 
     }
 }
