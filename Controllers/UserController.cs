@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PinArt_ProfileInfo_MS.Models;
 
 namespace PinArt_ProfileInfo_MS.Controllers
@@ -41,6 +42,35 @@ namespace PinArt_ProfileInfo_MS.Controllers
             _context.SaveChanges();
 
             return CreatedAtAction("GetUserId", new User { Id = user.Id }, user);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<User> DeleteUser(int id, User user)
+        {
+            if (id != user.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(user).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+
+        public ActionResult<User> PrivateUser(int id, User user)
+        {
+            if (id != user.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(user).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return NoContent();
         }
 
     }

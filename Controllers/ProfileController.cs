@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PinArt_ProfileInfo_MS.Models;
 
 namespace PinArt_ProfileInfo_MS.Controllers
@@ -41,6 +42,20 @@ namespace PinArt_ProfileInfo_MS.Controllers
             _context.SaveChanges();
 
             return CreatedAtAction("GetProfileId", new Profile { Id = profile.Id, UserId = profile.UserId, CountryId = profile.Id }, profile);
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult<Profile> EditProfile(int id, Profile profile)
+        {
+            if (id != profile.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(profile).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return NoContent();
         }
 
     }
