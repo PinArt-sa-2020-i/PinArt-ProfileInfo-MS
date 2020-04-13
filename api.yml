@@ -1,0 +1,807 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Profile Information API"
+  description: .NET Core + MySql
+  license:
+    name: Software Architecture, 2020-I
+
+# host: ec2-3-227-65-124.compute-1.amazonaws.com:8080
+# basePath: /api
+# schemes:
+#  - http
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  #User
+  /users:
+    post:
+      summary: Creates a new user
+      operationId: createUser
+      parameters:
+        - name: user
+          in: body
+          required: true
+          description: User Object
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: "#/definitions/User"
+        "400":
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+    get:
+      summary: Returns all users
+      operationId: getAllUsers
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: "#/definitions/UserList"
+        "406":
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+  /users/{id}:
+    get:
+      summary: Returns an user with the given id
+      operationId: getUserById
+      parameters:
+        - name: id
+          in: path
+          description: The id of the user to be returned
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: "#/definitions/User"
+        "404":
+          description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "406":
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: unexpected error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+    put:
+      summary: Updates a user Privado property
+      operationId: updateUser
+      parameters:
+        - name: id
+          in: path
+          description: The id of the user to be updated
+          required: true
+          type: integer
+        - name: user
+          in: body
+          required: true
+          description: User Object with privado property changed
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: "#/definitions/User"
+        "404":
+          description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "406":
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: unexpected error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+    delete:
+      summary: Sets the property eliminado true
+      operationId: deleteCUser
+      parameters:
+        - name: id
+          in: path
+          description: The id of the user to be deleted
+          required: true
+          type: integer
+        - name: user
+          in: body
+          required: true
+          description: User Object with eliminado property changed
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "406":
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: unexpected error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+  #Auth
+  /auth:
+    post:
+      summary: Creates a new Authentication register
+      operationId: createAuth
+      parameters:
+        - name: auth
+          in: body
+          required: true
+          description: Auth Object
+          schema:
+            $ref: "#/definitions/Auth"
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: "#/definitions/Auth"
+        "400":
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+    get:
+      summary: Returns all auth entries
+      operationId: getAllAuth
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: "#/definitions/AuthList"
+        "406":
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+  /auth/{id}:
+    get:
+      summary: Returns an auth with the given id
+      operationId: getAuthById
+      parameters:
+        - name: id
+          in: path
+          description: The id of the auth to be returned
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: "#/definitions/Auth"
+        "404":
+          description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "406":
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: unexpected error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+  #Cause
+  /cause:
+    post:
+      summary: Creates a new Cause for a report register
+      operationId: createCause
+      parameters:
+        - name: cause
+          in: body
+          required: true
+          description: Cause Object
+          schema:
+            $ref: "#/definitions/Cause"
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: "#/definitions/Cause"
+        "400":
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+    get:
+      summary: Returns all cause entries
+      operationId: getAllCause
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: "#/definitions/CauseList"
+        "406":
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+  /cause/{id}:
+    get:
+      summary: Returns an auth with the given id
+      operationId: getCauseById
+      parameters:
+        - name: id
+          in: path
+          description: The id of the cause to be returned
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: "#/definitions/Cause"
+        "404":
+          description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "406":
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: unexpected error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+  #Country
+  /country:
+    post:
+      summary: Creates a new Country register
+      operationId: createCountry
+      parameters:
+        - name: country
+          in: body
+          required: true
+          description: Country Object
+          schema:
+            $ref: "#/definitions/Country"
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: "#/definitions/Country"
+        "400":
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+    get:
+      summary: Returns all country entries
+      operationId: getAllCountry
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: "#/definitions/CountryList"
+        "406":
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+  /country/{id}:
+    get:
+      summary: Returns a coutnry with the given id
+      operationId: getCountryById
+      parameters:
+        - name: id
+          in: path
+          description: The id of the country to be returned
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: "#/definitions/Country"
+        "404":
+          description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "406":
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: unexpected error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+  #Recovery
+  /recovery:
+    post:
+      summary: Creates a new Recovery register
+      operationId: createRecovery
+      parameters:
+        - name: recovery
+          in: body
+          required: true
+          description: Recovery Object
+          schema:
+            $ref: "#/definitions/Recovery"
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: "#/definitions/Recovery"
+        "400":
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+    get:
+      summary: Returns all recovery entries
+      operationId: getAllRecoveries
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: "#/definitions/RecoveryList"
+        "406":
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+  /recovery/{id}:
+    get:
+      summary: Returns a recovery with the given id
+      operationId: getRecoveryById
+      parameters:
+        - name: id
+          in: path
+          description: The id of the recovery to be returned
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: "#/definitions/Recovery"
+        "404":
+          description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "406":
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: unexpected error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+  #Report
+  /report:
+    post:
+      summary: Creates a new Report register
+      operationId: createReport
+      parameters:
+        - name: report
+          in: body
+          required: true
+          description: Report Object
+          schema:
+            $ref: "#/definitions/Report"
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: "#/definitions/Report"
+        "400":
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+    get:
+      summary: Returns all report entries
+      operationId: getAllReport
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: "#/definitions/ReportList"
+        "406":
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+  /report/{id}:
+    get:
+      summary: Returns an auth with the given id
+      operationId: getReportById
+      parameters:
+        - name: id
+          in: path
+          description: The id of the report to be returned
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: "#/definitions/Report"
+        "404":
+          description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "406":
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: unexpected error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+  #Profile
+  /profile:
+    post:
+      summary: Creates a new Profile Info register
+      operationId: createProfile
+      parameters:
+        - name: profile
+          in: body
+          required: true
+          description: Profile Object
+          schema:
+            $ref: "#/definitions/Profile"
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: "#/definitions/Profile"
+        "400":
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+    get:
+      summary: Returns all profile entries
+      operationId: getAllProfiles
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: "#/definitions/ProfileList"
+        "406":
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+  /profile/{id}:
+    get:
+      summary: Returns a profile with the given id
+      operationId: getProfileById
+      parameters:
+        - name: id
+          in: path
+          description: The id of the profile to be returned
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: "#/definitions/Profile"
+        "404":
+          description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "406":
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: unexpected error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+    put:
+      summary: Updates the Profile of a User
+      operationId: updateProfile
+      parameters:
+        - name: id
+          in: path
+          description: The id of the profile to be updated
+          required: true
+          type: integer
+        - name: user
+          in: body
+          required: true
+          description: Profile Object with the updated Info
+          schema:
+            $ref: "#/definitions/Profile"
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: "#/definitions/Profile"
+        "404":
+          description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "406":
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: "#/definitions/ErrorModel"
+        "500":
+          description: unexpected error
+          schema:
+            $ref: "#/definitions/ErrorModel"
+
+definitions:
+  # Users
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+      Nombre:
+        type: string
+      Apellido:
+        type: string
+      Nick:
+        type: string
+      Correo:
+        type: string
+      Eliminado:
+        type: boolean
+      Privado:
+        type: boolean
+      CreatedAt:
+        type: string
+      Auth:
+        $ref: "#/definitions/Auth"
+      Profile:
+        $ref: "#/definitions/Profile"
+      Recoveries:
+        type: array
+        items:
+          $ref: "#/definitions/Recovery"
+      Received:
+        type: array
+        items:
+          $ref: "#/definitions/Report"
+
+  UserList:
+    type: object
+    properties:
+      Users:
+        type: array
+        items:
+          $ref: "#/definitions/User"
+
+  #Authentication
+  Auth:
+    type: object
+    properties:
+      id:
+        type: integer
+      estado:
+        type: string
+      userId:
+        type: integer
+
+  AuthList:
+    type: object
+    properties:
+      Users:
+        type: array
+        items:
+          $ref: "#/definitions/Auth"
+
+  #Profile
+  Profile:
+    type: object
+    properties:
+      id:
+        type: integer
+      FechaNacimiento:
+        type: string
+      Genero:
+        type: string
+      Foto:
+        type: string
+      Descripcion:
+        type: string
+      NoTelefono:
+        type: string
+      Edad:
+        type: integer
+      userId:
+        type: integer
+      countryId:
+        type: integer
+
+  ProfileList:
+    type: object
+    properties:
+      Users:
+        type: array
+        items:
+          $ref: "#/definitions/Profile"
+
+  #Recovery
+  Recovery:
+    type: object
+    properties:
+      Id:
+        type: integer
+      RecoveryCode:
+        type: string
+      Used:
+        type: boolean
+      CreatedAt:
+        type: string
+      userId:
+        type: integer
+
+  RecoveryList:
+    type: object
+    properties:
+      Users:
+        type: array
+        items:
+          $ref: "#/definitions/Recovery"
+
+  #Report
+  Report:
+    type: object
+    properties:
+      Id:
+        type: integer
+      Comentario:
+        type: string
+      userId:
+        type: integer
+      causeId:
+        type: integer
+
+  ReportList:
+    type: object
+    properties:
+      Users:
+        type: array
+        items:
+          $ref: "#/definitions/Report"
+
+  #Cause
+  Cause:
+    type: object
+    properties:
+      Id:
+        type: integer
+      Nombre:
+        type: string
+      Descripcion:
+        type: string
+
+  CauseList:
+    type: object
+    properties:
+      Users:
+        type: array
+        items:
+          $ref: "#/definitions/Cause"
+
+  #Country
+  Country:
+    type: object
+    properties:
+      Id:
+        type: integer
+      Nombre:
+        type: string
+      Prefijo:
+        type: string
+
+  CountryList:
+    type: object
+    properties:
+      Users:
+        type: array
+        items:
+          $ref: "#/definitions/Country"
+
+  # Errors
+  ErrorModel:
+    type: object
+    required:
+      - message
+      - code
+    properties:
+      message:
+        type: string
+      code:
+        type: number
+      description:
+        type: object
+
+# Added by API Auto Mocking Plugin
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /tpereza/PinArt-ProfileInfo-MS/1.0.0
+schemes:
+  - https
+  - http
