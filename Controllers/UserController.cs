@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PinArt_ProfileInfo_MS.Models;
@@ -71,6 +73,19 @@ namespace PinArt_ProfileInfo_MS.Controllers
             _context.SaveChanges();
 
             return NoContent();
+        }
+
+        [HttpGet("name/{name}")]
+        public async Task<User> GetLikeName(string name)
+        {
+            var userItem = await _context.Users.FromSqlRaw($"SELECT * FROM Users WHERE Nombre LIKE '%{name}%'").FirstOrDefaultAsync();
+
+            if (userItem == null)
+            {
+                return userItem;
+            }
+
+            return userItem;
         }
 
     }
