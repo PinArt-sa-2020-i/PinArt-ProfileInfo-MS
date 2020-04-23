@@ -9,5 +9,6 @@ namespace PinArt_ProfileInfo_MS.Models
         public string Nombre { get; set; }
         public string Prefijo { get; set; }
 
+
     }
 }

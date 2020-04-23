@@ -11,5 +11,7 @@ namespace PinArt_ProfileInfo_MS.Models
 
         public int CauseId { get; set; }
 
+        public virtual Cause Cause { get; set; }
+
     }
 }
