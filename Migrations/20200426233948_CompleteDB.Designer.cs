@@ -9,8 +9,8 @@ using PinArt_ProfileInfo_MS.Models;
 namespace PinArt_ProfileInfo_MS.Migrations
 {
     [DbContext(typeof(InfoContext))]
-    [Migration("20200411190957_CompleteDBv2")]
-    partial class CompleteDBv2
+    [Migration("20200426233948_CompleteDB")]
+    partial class CompleteDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,8 +63,8 @@ namespace PinArt_ProfileInfo_MS.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("Prefijo")
-                        .HasColumnType("int");
+                    b.Property<string>("Prefijo")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -163,9 +163,6 @@ namespace PinArt_ProfileInfo_MS.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Apellido")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<string>("Correo")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -174,12 +171,6 @@ namespace PinArt_ProfileInfo_MS.Migrations
 
                     b.Property<bool>("Eliminado")
                         .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Nick")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<bool>("Privado")
                         .HasColumnType("tinyint(1)");
@@ -191,7 +182,7 @@ namespace PinArt_ProfileInfo_MS.Migrations
 
             modelBuilder.Entity("PinArt_ProfileInfo_MS.Models.Authentication", b =>
                 {
-                    b.HasOne("PinArt_ProfileInfo_MS.Models.User", "User")
+                    b.HasOne("PinArt_ProfileInfo_MS.Models.User", null)
                         .WithMany("Auth")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -201,12 +192,12 @@ namespace PinArt_ProfileInfo_MS.Migrations
             modelBuilder.Entity("PinArt_ProfileInfo_MS.Models.Profile", b =>
                 {
                     b.HasOne("PinArt_ProfileInfo_MS.Models.Country", "Country")
-                        .WithMany("Profiles")
+                        .WithMany()
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PinArt_ProfileInfo_MS.Models.User", "User")
+                    b.HasOne("PinArt_ProfileInfo_MS.Models.User", null)
                         .WithMany("Profiles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -215,7 +206,7 @@ namespace PinArt_ProfileInfo_MS.Migrations
 
             modelBuilder.Entity("PinArt_ProfileInfo_MS.Models.Recovery", b =>
                 {
-                    b.HasOne("PinArt_ProfileInfo_MS.Models.User", "User")
+                    b.HasOne("PinArt_ProfileInfo_MS.Models.User", null)
                         .WithMany("Recoveries")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -225,12 +216,12 @@ namespace PinArt_ProfileInfo_MS.Migrations
             modelBuilder.Entity("PinArt_ProfileInfo_MS.Models.Report", b =>
                 {
                     b.HasOne("PinArt_ProfileInfo_MS.Models.Cause", "Cause")
-                        .WithMany("Reports")
+                        .WithMany()
                         .HasForeignKey("CauseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PinArt_ProfileInfo_MS.Models.User", "User")
+                    b.HasOne("PinArt_ProfileInfo_MS.Models.User", null)
                         .WithMany("Received")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
