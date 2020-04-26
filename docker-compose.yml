@@ -7,9 +7,16 @@ services:
     ports:
       - "3306:3306"
 
-  auth-api:
+  profile-api:
     depends_on:
       - mysql
     build: .
     ports:
       - "8080:80"
+
+  auth-api:
+    depends_on:
+      - mysql
+    build: /home/ubuntu/PinArt-Authentication-MS
+    ports:
+      - "4000:80"
