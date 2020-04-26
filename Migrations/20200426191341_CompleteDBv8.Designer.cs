@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PinArt_ProfileInfo_MS.Models;
 
 namespace PinArt_ProfileInfo_MS.Migrations
 {
     [DbContext(typeof(InfoContext))]
-    partial class InfoContextModelSnapshot : ModelSnapshot
+    [Migration("20200426191341_CompleteDBv8")]
+    partial class CompleteDBv8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
