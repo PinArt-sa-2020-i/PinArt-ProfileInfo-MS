@@ -42,6 +42,9 @@ namespace PinArt_ProfileInfo_MS.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    firstName = table.Column<string>(nullable: true),
+                    lastName = table.Column<string>(nullable: true),
+                    username = table.Column<string>(nullable: true),
                     Correo = table.Column<string>(nullable: true),
                     Eliminado = table.Column<bool>(nullable: false),
                     Privado = table.Column<bool>(nullable: false),

@@ -9,8 +9,8 @@ using PinArt_ProfileInfo_MS.Models;
 namespace PinArt_ProfileInfo_MS.Migrations
 {
     [DbContext(typeof(InfoContext))]
-    [Migration("20200501221025_CompleteDBv2")]
-    partial class CompleteDBv2
+    [Migration("20200501223202_CompleteDB")]
+    partial class CompleteDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
