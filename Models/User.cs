@@ -6,6 +6,9 @@ namespace PinArt_ProfileInfo_MS.Models
     public class User
     {
         public int Id { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string username { get; set; }
         public string Correo { get; set; }
         public bool Eliminado { get; set; }
         public bool Privado { get; set; }
