@@ -11,6 +11,7 @@ namespace PinArt_ProfileInfo_MS.Models
         public string Descripcion { get; set; }
         public string NoTelefono { get; set; }
         public string Edad { get; set; }
+        public string Gustos {get; set;}
 
         public int UserId { get; set; }
 
